@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://dgrm:q6JOW5uNBxsmRUWa@cluster0.ymxlw.mongodb.net/infnet?retryWrites=true&w=majority",
+     "jwtSecret": "e72ef6deb1b37c1fe5bb6cd506925029",
+     "githubToken": "<yoursecrectaccesstoken>"
+     
+ }
