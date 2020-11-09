@@ -14,16 +14,24 @@ try{
 jwt.verify(token, config.get('jwtSecret'), (error, decoded) => {
     if (error) {
     return res.status(401).json({msg: 'Token not valid'})}
+    
     req.user= decoded.user  
-    map=router_map(req.baseUrl, decoded.user)
-    if (map.status==200){
-        next()
-    }else{
-        return res.status(map.status).json({msg:map.msg})
+    console.log(req.baseUrl)
+    console.log(decoded.user.isadmin)
+    if (req.baseUrl == '/admin/user' && decoded.user.isadmin == false){
+        
+        return res.status(403).json({ msg: 'you shall not pass!' });
     }
-})
+    if (req.baseUrl == '/admin/resto' && decoded.user.isadmin == false){
+        
+        return res.status(403).json({ msg: 'you shall not pass!' });
+    }
+        next();
+
+    })
+
 }catch (err){
-console.error('middleware malfunction')
+console.error(err)
 res.status(500).json({msg:' Server Error'})
 }
 }
