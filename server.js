@@ -17,6 +17,7 @@ app.use('/admin/user', require('./routes/admin/user'))
 app.use('/login', require ('./routes/login'))
 app.use('/admin/resto', require ('./routes/admin/resto'))
 app.use('/resto', require ('./routes/resto'))
+app.use('/cadastro', require ('./routes/cadastro'))
 // app.use('/user/cast', require ('./routes/cast'))
 
 app.listen(PORT, () => { console.log(`Projdupla rodando na ${PORT}`) })
