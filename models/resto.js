@@ -27,7 +27,9 @@ const RestoSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    
+    instagram : {
+        type: String,
+    }, 
 })
 
 module.exports =  mongoose.model('Resto', RestoSchema)
