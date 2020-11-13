@@ -81,16 +81,17 @@ router.post('/', auth, [
   check('nome').not().isEmpty(),
   check('cozinha').not().isEmpty(),
   check('endereco').not().isEmpty(),
+  check('instagram').not().isEmpty(),
   
 ], async (req, res, next) => {
   try {
-    let { nome, cozinha, endereco } = req.body
+    let { nome, cozinha, endereco, instagram } = req.body
 
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() })
     } else {
-      let resto = new Resto({ nome, cozinha, endereco })
+      let resto = new Resto({ nome, cozinha, endereco, instagram })
 
       await resto.save()
       if (resto.id) {

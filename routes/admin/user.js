@@ -108,7 +108,7 @@ router.patch('/:userId', auth, [], async (request, res, next) => {
 // @route    GET /user
 // @desc     LIST user
 // @access   Private
-router.get('/', auth, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const user = await User.find({})
     res.json(user)

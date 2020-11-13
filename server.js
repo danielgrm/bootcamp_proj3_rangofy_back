@@ -18,6 +18,8 @@ app.use('/login', require ('./routes/login'))
 app.use('/admin/resto', require ('./routes/admin/resto'))
 app.use('/resto', require ('./routes/resto'))
 app.use('/cadastro', require ('./routes/cadastro'))
-// app.use('/user/cast', require ('./routes/cast'))
+app.use('/likes', require ('./routes/likes'))
+app.use('/dislikes', require ('./routes/dislikes'))
+
 
 app.listen(PORT, () => { console.log(`Projdupla rodando na ${PORT}`) })
