@@ -23,7 +23,7 @@ router.get('/:restoId', [], async (req, res, next) => {
 
 // @route    DELETE /resto/:restoId
 // @access   Public
-router.delete('/:restoId', auth, async(req, res, next) => {
+router.delete('/:restoId',  async(req, res, next) => {
   try {
     const id = req.params.restoId
     const resto = await Resto.findOneAndDelete({_id : id})
@@ -41,7 +41,7 @@ router.delete('/:restoId', auth, async(req, res, next) => {
 
 // @route    PATCH /resto/:restoId
 // @access   Public
-router.patch('/:restoId', auth,  [], async (request, res, next) => {
+router.patch('/:restoId', [], async (request, res, next) => {
   try {
     const errors = validationResult(request)
     if (!errors.isEmpty()) {
@@ -77,7 +77,7 @@ router.get('/', async (req, res, next) => {
 // @route    POST /resto
 // @desc     CREATE resto
 // @access   Public
-router.post('/', auth, [
+router.post('/',  [
   check('nome').not().isEmpty(),
   check('cozinha').not().isEmpty(),
   check('endereco').not().isEmpty(),
