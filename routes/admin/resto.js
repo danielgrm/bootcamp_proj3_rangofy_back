@@ -41,14 +41,15 @@ router.delete('/:restoId',  async(req, res, next) => {
 
 // @route    PATCH /resto/:restoId
 // @access   Public
-router.patch('/:restoId', [], async (request, res, next) => {
+router.patch('/:restoId', [], async (req, res, next) => {
   try {
-    const errors = validationResult(request)
+    const errors = validationResult(req)
     if (!errors.isEmpty()) {
       res.status(400).send({ errors: errors.array() })
       return
     }
-    const id = request.params.restoId
+    let bodyRequest = req.body
+    const id = req.params.restoId
     const update = { $set: bodyRequest }
     const resto = await Resto.findByIdAndUpdate(id, update, { new: true })
     if (resto) {
@@ -58,7 +59,7 @@ router.patch('/:restoId', [], async (request, res, next) => {
     }
   } catch (err) {
     console.error(err.message)
-    res.status(500).send({ "error": "Server Error" })
+    res.status(500).send({ "error": err })
   }
 })
 

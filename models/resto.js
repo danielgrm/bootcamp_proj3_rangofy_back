@@ -12,13 +12,6 @@ const RestoSchema = new mongoose.Schema({
         type: String,
         required: true
     }, 
-    like : {
-        type: Number,
-      
-    },
-    dislike : {
-        type: Number,
-    },
     userlike: [
         {
            email: {
