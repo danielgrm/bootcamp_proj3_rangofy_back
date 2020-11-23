@@ -12,7 +12,8 @@ router.post('/:restoId', async (req, res, next) => {
 
     const id = req.params.restoId
     const usermail = req.body.email
-    const poedislike = await Resto.findByIdAndUpdate(id , { $addToSet: { userdislike: usermail } }, { new: true })
+//    const poedislike = await Resto.findByIdAndUpdate(id , { $addToSet: { userdislike: usermail } }, { new: true })
+    const poedislike = await Resto.findByIdAndUpdate(id , { $push: { userdislike: usermail } }, { new: true })
     const tiralike = await Resto.findByIdAndUpdate(id, { $pull: { userlike: usermail } }, { new: true })
 
     if (poedislike) {
