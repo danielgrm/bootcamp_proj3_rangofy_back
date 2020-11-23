@@ -13,20 +13,20 @@ const RestoSchema = new mongoose.Schema({
         required: true
     }, 
     userlike: [
-    {
-            email: {
-           type: String,
-        //    required: true
-          },
-        }
+        //     email: {
+        //     unique: true,
+        //    type: String,
+        // //    required: true
+        //   },
+        // }
         ],
     userdislike: [
-        {
-          email: {
-            type: String,
-            // required: true
-          }
-        }
+        // {
+        //   email: {
+        //     type: String,
+        //     // required: true
+        //   }
+        // }
         ],
     instagram : {
         type: String,
