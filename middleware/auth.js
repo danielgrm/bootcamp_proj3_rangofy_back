@@ -16,8 +16,7 @@ jwt.verify(token, config.get('jwtSecret'), (error, decoded) => {
     return res.status(401).json({msg: 'Token not valid'})}
     
     req.user= decoded.user  
-    console.log(req.baseUrl)
-    console.log(decoded.user.isadmin)
+
     if (req.baseUrl == '/admin/user' && decoded.user.isadmin == false){
         
         return res.status(403).json({ msg: 'you shall not pass!' });

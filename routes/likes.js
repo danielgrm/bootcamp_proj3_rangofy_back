@@ -2,16 +2,17 @@ const express = require('express');
 const Resto = require('../models/resto');
 const router = express.Router();
 const auth = require('../middleware/auth')
+//const decoded = require
 
 
 // @route    POST /education
 // @desc     CREATE education
 // @access   Private
-router.post('/:restoId', async (req, res, next) => {
+router.post('/:restoId',auth, async (req, res, next) => {
   try {
 
     const id = req.params.restoId
-    const usermail = req.body.email
+    const usermail = req.user.email
     const poelike = await Resto.findByIdAndUpdate(id , { $addToSet: { userlike: usermail } }, { new: true })
     const tiradislike = await Resto.findByIdAndUpdate(id, { $pull: { userdislike: usermail } }, { new: true })
 
