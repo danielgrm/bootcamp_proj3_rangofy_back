@@ -12,6 +12,15 @@ router.post('/:restoId', auth, async (req, res, next) => {
 
     const id = req.params.restoId
     const usermail = req.user.email
+
+    let tem = await Resto.findById(id)
+    let verifica = tem.userdislike.filter(function(elem){
+      return elem.email == usermail
+    })
+    if (verifica.length > 0) {
+      res.status(401).json({error : "voce ja deu dislike, po!"})
+    }else{
+
     const poedislike = await Resto.findByIdAndUpdate(id , { $addToSet: { userdislike: {email: usermail }} }, { new: true })
     const tiralike = await Resto.findByIdAndUpdate(id, { $pull: { userlike: {email: usermail}} }, { new: true })
 
@@ -21,7 +30,7 @@ router.post('/:restoId', auth, async (req, res, next) => {
       res.status(404).send({ "error": "Resto not found" })
     }
     next()
-  
+    }
   } catch (err) {
     console.error(err.message)
     res.status(500).send({ "error": "Server Error" })

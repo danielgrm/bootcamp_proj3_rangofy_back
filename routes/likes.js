@@ -13,14 +13,23 @@ router.post('/:restoId',auth, async (req, res, next) => {
 
     const id = req.params.restoId
     const usermail = req.user.email
-    const poelike = await Resto.findByIdAndUpdate(id , { $addToSet: { userlike: {email: usermail }}}, { new: true })
-    const tiradislike = await Resto.findByIdAndUpdate(id, { $pull: { userdislike:  {email:usermail }}}, { new: true })
-
+    let tem = await Resto.findById(id)
+    let verifica = tem.userlike.filter(function(elem){
+      return elem.email == usermail
+    })
+    if (verifica.length > 0) {
+      res.status(401).json({error : "voce ja deu like, po!"})
+    }else{
+      const poelike = await Resto.findByIdAndUpdate(id , { $push: { userlike: {email: usermail }}}, { new: true })
+      const tiradislike = await Resto.findByIdAndUpdate(id, { $pull: { userdislike:  {email:usermail }}}, { new: true })
+    
+   
     if (poelike) {
       res.json(tiradislike)
     } else {
       res.status(404).send({ "error": "Resto not found" })
    }
+  }
 
   } catch (err) {
     console.error(err.message)
