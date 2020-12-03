@@ -8,22 +8,22 @@ module.exports = function (req, res ,next){
 const token = req.header('x-auth-token')
 
 if(!token){
-    return res.status(401).json({msg: 'No Token, no deal'})
+    return res.status(401).json({msg: 'Você não fez login.'})
 }
 try{
 jwt.verify(token, config.get('jwtSecret'), (error, decoded) => {
     if (error) {
-    return res.status(401).json({msg: 'Token not valid'})}
+    return res.status(401).json({msg: 'Token inválido, faça login novamente.'})}
     
     req.user= decoded.user  
 
     if (req.baseUrl == '/admin/user' && decoded.user.isadmin == false){
         
-        return res.status(403).json({ msg: 'you shall not pass!' });
+        return res.status(403).json({ msg: 'Você não tem acesso a essa área.' });
     }
     if (req.baseUrl == '/admin/resto' && decoded.user.isadmin == false){
         
-        return res.status(403).json({ msg: 'you shall not pass!' });
+        return res.status(403).json({ msg: 'Você não tem acesso a essa área.' });
     }
         next();
 

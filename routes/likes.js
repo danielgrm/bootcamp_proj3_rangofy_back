@@ -18,7 +18,7 @@ router.post('/:restoId',auth, async (req, res, next) => {
       return elem.email == usermail
     })
     if (verifica.length > 0) {
-      res.status(401).json({error : "voce ja deu like, po!"})
+      res.status(401).json({error : "Esse restaurante já tem seu like!"})
     }else{
       const poelike = await Resto.findByIdAndUpdate(id , { $push: { userlike: {email: usermail }}}, { new: true })
       const tiradislike = await Resto.findByIdAndUpdate(id, { $pull: { userdislike:  {email:usermail }}}, { new: true })
@@ -27,7 +27,7 @@ router.post('/:restoId',auth, async (req, res, next) => {
     if (poelike) {
       res.json(tiradislike)
     } else {
-      res.status(404).send({ "error": "Resto not found" })
+      res.status(404).send({ "error": "Restaurante não encontrado" })
    }
   }
 

@@ -6,9 +6,9 @@ const bcrypt = require('bcryptjs');
 //const auth = require('../../middleware/auth')
 
 router.post('/', [
-  check('email', 'email is not valid').isEmail(),
+  check('email', 'e-mail invalido').isEmail(),
   check('nome').not().isEmpty(),
-  check('senha', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
+  check('senha', 'Senha deve ter 6 ou mais caracteres').isLength({ min: 6 })
 ], async (req, res, next) => {
   try {
     let { nome, email, senha, is_active, is_admin } = req.body
